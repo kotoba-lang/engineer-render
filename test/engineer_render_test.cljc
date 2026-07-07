@@ -27,6 +27,16 @@
     (is (< (Math/abs (- (first back) (first world))) 1e-5))
     (is (< (Math/abs (- (second back) (second world))) 1e-5))))
 
+;; locks the original EngViewport zoom_to_fit semantics across the canvaskit
+;; delegation: center = bbox center, zoom = 0.9 * min(w/ex, h/ey), no clamp
+(deftest viewport-zoom-to-fit
+  (let [vp (viewport/zoom-to-fit (viewport/viewport 800.0 600.0) [0.0 0.0] [400.0 300.0])]
+    (is (< (Math/abs (- (:zoom vp) 1.8)) 1e-9))
+    (is (< (Math/abs (- (first (:center vp)) 200.0)) 1e-9))
+    (is (< (Math/abs (- (second (:center vp)) 150.0)) 1e-9)))
+  (let [vp (viewport/zoom-to-fit (viewport/viewport 800.0 600.0) [0.0 0.0] [1.0e-3 1.0e-3])]
+    (is (> (:zoom vp) 64.0) "no zoom clamp — tiny bboxes still fit (original had no clamp)")))
+
 ;; draw-list buffer sanity (no direct Rust test existed for EngDrawList, but
 ;; push/clear/len/is_empty are public API surface — covered for completeness)
 (deftest draw-list-buffer
