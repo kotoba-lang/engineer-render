@@ -9,7 +9,7 @@
 
 (deftest namespace-loads
   (testing "the restored CLJC namespace loads"
-    (is (some? (the-ns 'engineer-render)))))
+    (is (some? (find-ns 'engineer-render)))))
 
 ;; mirrors `color_map_jet_endpoints`
 (deftest color-map-jet-endpoints
