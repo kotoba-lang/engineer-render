@@ -31,5 +31,5 @@ public API surface).
 ## Develop
 
 ```bash
-clojure -M:test
+kbb -M:test
 ```
