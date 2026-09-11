@@ -24,7 +24,7 @@ contracts (constraint/DRC/etc).
 Restored — all 3 concerns ported from the original 250-line Rust `lib.rs`
 (draw-command variants kept as plain EDN maps rather than a closed enum, so
 new command kinds don't require a schema change), with both original Rust
-unit tests mirrored 1:1 in `test/engineer_render_test.cljc` (+1 smoke test,
+unit tests mirrored 1:1 in `test/engineer_render_test.cljk` (+1 smoke test,
 +1 draw-list buffer sanity test not present in the original but covering
 public API surface).
 
